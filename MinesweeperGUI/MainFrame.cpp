@@ -5,8 +5,6 @@
 #include <wx/msgdlg.h>
 #include <cmath>
 
-#include <windows.h>
-
 // Create Event table to handle Top bar buttons
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 EVT_BUTTON(homeButtonID, MainFrame::OnHomeClicked)
