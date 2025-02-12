@@ -16,6 +16,7 @@ This game has a main menu that allows the user to choose a grid size from the fo
 - Custom
 
 If the user selects the Custom option, they can enter a grid width, height, and number of bombs
+
 <img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/minesweeperMainMenuCustom.jpg" alt="Alt Text" width="250" height="250">
 
 The game includes the following features
