@@ -5,6 +5,8 @@
 #include <wx/msgdlg.h>
 #include <cmath>
 
+#include <windows.h>
+
 // Create Event table to handle Top bar buttons
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 EVT_BUTTON(homeButtonID, MainFrame::OnHomeClicked)
@@ -480,10 +482,14 @@ void MainFrame::OnButtonPressed(int xPos, int yPos) {
 			// Check if there are no surrounding bombs (cell is empty)
 			if (surroundingBombs == 0) {
 				ClearEmpty(xPos, yPos);
+				CheckForVictory();
 			}
 			else { // has surrounding bombs: Label how many bombs surround the cell
 				LabelCell(xPos, yPos, surroundingBombs);
-				CheckForVictory();
+
+				if (IsGridCleared()) {
+					CheckForVictory();
+				}
 			}
 		}
 	}	
@@ -571,8 +577,23 @@ void MainFrame::ClearEmpty(int xPos, int yPos) {
 		buttons[xPos][yPos].numMinesSurrounding = surroundingBombs;
 		LabelCell(xPos, yPos, surroundingBombs);
 	}
+}
 
-	CheckForVictory();
+// This checks if the grid has been cleared 
+bool MainFrame::IsGridCleared() {
+
+	// Loop through all of the cells in the grid 
+	for (int i = 0; i < nCols; i++) {
+		for (int j = 0; j < nRows; j++) {
+
+			// If cell is not cleared nor a bomb, grid is not cleared 
+			if (!buttons[i][j].IsCleared && !buttons[i][j].IsBomb) {
+				return false; 
+			}
+		}
+	}
+
+	return true; // if grid is cleared
 }
 
 // Counts how many bumbs are surrounding the cell at inputted coordinates
@@ -665,28 +686,21 @@ void MainFrame::SetFlag(int xPos, int yPos) {
 // Check if the player has won, ends game if so
 void MainFrame::CheckForVictory() {
 
-	// assume victory by default 
-	bool IsVictory = true;
+	bool IsVictory = false;
 
-	// Loop through all of the cells in the grid
-	for (int i = 0; i < nCols; i++) {
-		for (int j = 0; j < nRows; j++) {
-
-			// determine if the current cell is not cleared and not a bomb (if so then player has not yet won)
-			if (!buttons[i][j].IsCleared && !buttons[i][j].IsBomb) { 
-				IsVictory = false;
-				break;
-			}
-		}
-		if (!IsVictory) { 
-			break; 
-		}
+	// Determine if the grid is empty (player has won)
+	if (IsGridCleared()) {
+		IsVictory = true;
 	}
 
 	// If Player has won, display a message and prompt a restart
 	if (IsVictory) {
 
-		if (wxMessageBox(wxT("VICTORY! \t Restart?"), wxT("Mines Sweeped!"), wxYES_NO | wxICON_ASTERISK) == wxYES) {
+		// ask user if they want to restart 
+		int userResponse = wxMessageBox(wxT("VICTORY! \t Restart?"), wxT("Mines Sweeped!"), wxYES_NO | wxICON_ASTERISK);
+			
+		// If user wants to restart 
+		if (userResponse == wxYES) {
 			ReStart();
 		}
 	}
@@ -784,6 +798,7 @@ void MainFrame::OnButtonRestartClicked(wxCommandEvent& evt) {
 
 // Restart the game with the same grid size and # of bombs
 void MainFrame::ReStart() {
+
 	// Loop through all of the cells are set all to their default state
 	for (int i = 0; i < nCols; i++) {
 		for (int j = 0; j < nRows; j++) {

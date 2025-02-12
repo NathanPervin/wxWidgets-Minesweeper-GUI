@@ -41,6 +41,7 @@ private:
 	void PlaceBombs();
 	int CountBombsSurrounding(int xPos, int yPos);
 	void ClearEmpty(int xPos, int yPos);
+	bool IsGridCleared();
 	void LabelCell(int xPos, int yPos, int surroundingBombs);
 	void SetFlag(int, int);
 	void CheckForVictory();
