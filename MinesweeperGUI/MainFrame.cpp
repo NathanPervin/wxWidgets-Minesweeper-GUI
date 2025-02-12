@@ -137,24 +137,24 @@ bool MainFrame::HandleCustomSelection() {
 	wxString numBombsStr = numBombsTextCtrl->GetValue();
 
 	// Determines If user input for grid width is allowed 
-	if (!ValidateInput(gridWidthStr)) {
-		wxMessageBox("Invalid Grid Width! Please enter a number between 5 and 256.",
+	if (!ValidateInput(gridWidthStr, false)) {
+		wxMessageBox("Invalid Grid Width! Please enter a number between 5 and 50.",
 			"Input Error",
 			wxOK | wxICON_ERROR);
 		return false;
 	}
 
 	// Determines If user input for grid height is allowed 
-	if (!ValidateInput(gridHeightStr)) {
-		wxMessageBox("Invalid Grid Height! Please enter a number between 5 and 256.",
+	if (!ValidateInput(gridHeightStr, false)) {
+		wxMessageBox("Invalid Grid Height! Please enter a number between 5 and 50.",
 			"Input Error",
 			wxOK | wxICON_ERROR);
 		return false;
 	}
 
 	// Determines If user input for number of bombs is allowed 
-	if (!ValidateInput(numBombsStr)) {
-		wxMessageBox("Invalid Bomb Count!",
+	if (!ValidateInput(numBombsStr, true)) {
+		wxMessageBox("Invalid Bomb Count! Please enter a number between 5 and 2490.",
 			"Input Error",
 			wxOK | wxICON_ERROR);
 		return false;
@@ -805,7 +805,7 @@ void MainFrame::ReStart() {
 }
 
 // Determines if user inputted grid width or height is valid 
-bool MainFrame::ValidateInput(wxString& inputStr) {
+bool MainFrame::ValidateInput(wxString& inputStr, bool IsBombEntry) {
 
 	// initialize intermediate variable 
 	long value;
@@ -815,9 +815,18 @@ bool MainFrame::ValidateInput(wxString& inputStr) {
 		return false;
 	}
 
-	// Check if the number is within the allowed range
-	if (value < 5 || value > 256) {
-		return false;
+	// Check if the input is for number of bombs
+	if (!IsBombEntry) {
+		// Check if the number is within the allowed range for width and height
+		if (value < 5 || value > 50) {
+			return false;
+		}
+	}
+	else {
+		// Check if the number is within the allowed range for number of bombs
+		if (value < 5 || value > 2490) {
+			return false;
+		}
 	}
 
 	return true;

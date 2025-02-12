@@ -20,7 +20,7 @@ private:
 	void OnGridSizeChange(wxCommandEvent& event);
 	void HideCustomInputs();
 	void ShowCustomInputs();
-	bool ValidateInput(wxString&);
+	bool ValidateInput(wxString&, bool IsBombEntry);
 
 	// Define methods that handle transition from main menu to the game
 	void OnStartClicked(wxCommandEvent& evt);
