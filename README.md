@@ -27,7 +27,7 @@ The game includes the following features
 - Vertical and Horizontal scroll for larger than 9x9 grid sizes
 
 ##### Flag, Hint, and Restart
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperMainMenuCustom.jpg" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperDemo.gif" alt="Alt Text" width="250" height="250">
 
 ##### Horizontal and Vertical Scroll
 <img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/30x16GIF.gif" alt="Alt Text" width="250" height="250">
