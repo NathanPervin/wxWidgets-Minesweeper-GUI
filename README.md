@@ -1,5 +1,5 @@
 # __wxWidgets Minesweeper GUI__
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/9x9img2.jpg" alt="Alt Text" width="500" height="500">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9img2.jpg" alt="Alt Text" width="500" height="500">
 
 ## Description
 This is a basic minesweeper game that follows the same standard rules:
@@ -27,10 +27,10 @@ The game includes the following features
 - Vertical and Horizontal scroll for larger than 9x9 grid sizes
 
 ##### Flag, Hint, and Restart
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/minesweeperDemo.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperMainMenuCustom.jpg" alt="Alt Text" width="250" height="250">
 
 ##### Horizontal and Vertical Scroll
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/30x16GIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/30x16GIF.gif" alt="Alt Text" width="250" height="250">
 
 ## Installation and dependencies 
 Software Used:
