@@ -5,7 +5,7 @@
 This is a basic minesweeper game that follows the same standard rules:
 - Each number represents how many mines are in the surrounding 8 cells
 - If the player clicks on a mine, the player loses
-- If they player clears all non-mine cells, the player wins 
+- If the player clears all non-mine cells, the player wins 
 
 This program was created using the wxWidgets framework. 
 
