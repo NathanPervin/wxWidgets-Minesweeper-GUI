@@ -44,8 +44,12 @@ private:
 	bool IsGridCleared();
 	void LabelCell(int xPos, int yPos, int surroundingBombs);
 	void SetFlag(int, int);
-	void CheckForVictory();
+	bool CheckForVictory();
 	void ReStart();
+	void RevealSurroundingCells(int xPos, int yPos);
+	int CountFlagsSurrounding(int xPos, int yPos);
+	void ClearSurroundingCells(int xPos, int yPos);
+	void ShowMinesAndFalseFlags();
 
 	// Define method that will bring user back to main menu
 	void GoToMainMenu();
@@ -79,6 +83,7 @@ private:
 	wxUniChar flagSetChar = wxUniChar(0x0001F6A9);
 	wxUniChar flagIndicatorChar = wxUniChar(0x0001F3F3);
 	wxUniChar homeChar = wxUniChar(0x0001F3E0);
+	wxUniChar falseFlagChar = wxUniChar(0x00002716); // 0x00002612
 
 	// Define sizers for Main Menu
 	wxBoxSizer* lowerSizer;

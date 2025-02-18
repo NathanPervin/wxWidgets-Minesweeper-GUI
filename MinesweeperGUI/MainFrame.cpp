@@ -467,15 +467,22 @@ void MainFrame::OnButtonPressed(int xPos, int yPos) {
 
 		// Cell clicked is a bomb and not flagged, end game, prompt a restart 
 		if (IsUnflaggedBomb(xPos, yPos)) {
-			buttons[xPos][yPos].button->SetLabel(bombChar);
+
+			//buttons[xPos][yPos].button->SetLabel(bombChar);
+			ShowMinesAndFalseFlags();
 			if (wxMessageBox(wxT("KABOOM! \t Restart?"), wxT("Game Over"), wxYES_NO | wxICON_ERROR) == wxYES) {
 				ReStart();
 			}
 		} 
+		// If player clicks on an already revealed cell
+		else if (buttons[xPos][yPos].IsCleared) {
+			RevealSurroundingCells(xPos, yPos); 
+		}
 		// If cell clicked is not a bomb, and not flagged
 		else if (!buttons[xPos][yPos].IsFlagged) { 
 
 			int surroundingBombs = CountBombsSurrounding(xPos, yPos);
+			buttons[xPos][yPos].numMinesSurrounding = surroundingBombs;
 
 			// Check if there are no surrounding bombs (cell is empty)
 			if (surroundingBombs == 0) {
@@ -560,7 +567,7 @@ void MainFrame::ClearEmpty(int xPos, int yPos) {
 	if (surroundingBombs == 0) {
 
 		// loop through the 8 cells surrounding the current cell
-		for (int i = 0; i < 8; ++i) {
+		for (int i = 0; i < 8; i++) {
 
 			int newX = xPos + dx[i];
 			int newY = yPos + dy[i];
@@ -604,12 +611,12 @@ int MainFrame::CountBombsSurrounding(int xPos, int yPos) {
 	int count = 0;
 
 	// Iterate through the 8 surrounding cells, incriment count if there is a bomb  
-	for (int i = 0; i < 8; ++i) {
+	for (int i = 0; i < 8; i++) {
 		int newX = xPos + dx[i];
 		int newY = yPos + dy[i];
 		if (newX >= 0 && newY >= 0 && newX < nCols && newY < nRows) {
 			if (buttons[newX][newY].IsBomb) {
-				++count;  
+				count++;  
 			}
 		}
 	}
@@ -682,7 +689,7 @@ void MainFrame::SetFlag(int xPos, int yPos) {
 }
 
 // Check if the player has won, ends game if so
-void MainFrame::CheckForVictory() {
+bool MainFrame::CheckForVictory() {
 
 	bool IsVictory = false;
 
@@ -700,6 +707,7 @@ void MainFrame::CheckForVictory() {
 		// If user wants to restart 
 		if (userResponse == wxYES) {
 			ReStart();
+			return true;
 		}
 	}
 }
@@ -875,4 +883,115 @@ bool MainFrame::IsFlaggable(int xPos, int yPos) {
 	else {
 		return false;
 	}
+}
+
+// Allows user to click on a numbered cell with the 
+// same number of flags surrounding it as its number 
+// and clear any surrounding cells 
+void MainFrame::RevealSurroundingCells(int xPos, int yPos) {
+
+	// Only checks if the number of flags surrounding a cell equals the number of mines
+	// surround the cell. This doesn't check if the flags were placed correctly 
+	// So, if the user flags incorrectly and a mine is in the surrounding cells, the game ends
+	int numFlagsSurrounding = CountFlagsSurrounding(xPos, yPos);
+	if (numFlagsSurrounding == buttons[xPos][yPos].numMinesSurrounding) {
+		ClearSurroundingCells(xPos, yPos);
+	}
+}
+
+// Counts the number of flags in the 8 surrounding cells of input coordinate
+int MainFrame::CountFlagsSurrounding(int xPos, int yPos) {
+	// Define all possible single movements from an initial coordinate
+	const int dx[] = { -1, 0, 1, 0, -1, -1, 1, 1 };
+	const int dy[] = { 0, -1, 0, 1, -1, 1, -1, 1 };
+
+	int count = 0;
+
+	// Iterate through the 8 surrounding cells, incriment count if there is a bomb  
+	for (int i = 0; i < 8; i++) {
+		int newX = xPos + dx[i];
+		int newY = yPos + dy[i];
+		if (newX >= 0 && newY >= 0 && newX < nCols && newY < nRows) {
+			if (buttons[newX][newY].IsFlagged) {
+				count++;
+			}
+		}
+	}
+
+	return count;
+}
+
+// Clears cells around a numbered cell
+void MainFrame::ClearSurroundingCells(int xPos, int yPos) {
+
+	// Define all possible single movements from an initial coordinate
+	const int dx[] = { -1, 0, 1, 0, -1, -1, 1, 1 };
+	const int dy[] = { 0, -1, 0, 1, -1, 1, -1, 1 };
+
+	// Iterate through the 8 surrounding cells, incriment count if there is a bomb  
+	for (int i = 0; i < 8; i++) {
+		int newX = xPos + dx[i];
+		int newY = yPos + dy[i];
+		if (newX >= 0 && newY >= 0 && newX < nCols && newY < nRows) {
+
+			// check if current surrounding cell is a mine  
+			if (IsUnflaggedBomb(newX, newY)) {
+				//buttons[newX][newY].button->SetLabel(bombChar);
+				ShowMinesAndFalseFlags();
+
+				int userResponse = wxMessageBox(wxT("KABOOM! \t Restart?"), wxT("Game Over"), wxYES_NO | wxICON_ERROR);
+				if (userResponse == wxYES) {
+					ReStart();
+					return;
+				}
+
+			} 
+			// Ensure that flags are not removed 
+			else if (!buttons[newX][newY].IsFlagged) {
+
+				int surroundingBombs = CountBombsSurrounding(newX, newY);
+				buttons[newX][newY].numMinesSurrounding = surroundingBombs;
+
+				// Check if there are no surrounding bombs (cell is empty)
+				if (surroundingBombs == 0) {
+					ClearEmpty(newX, newY);
+					if (IsGridCleared()) {
+						if (CheckForVictory()) {
+							return;
+						}
+					}
+				}
+				else { // has surrounding bombs: Label how many bombs surround the cell
+					LabelCell(newX, newY, surroundingBombs);
+
+					// check for victory 
+					if (IsGridCleared()) {
+						if (CheckForVictory()) {
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Displays all unflagged mines and false flags after a play has lost
+void MainFrame::ShowMinesAndFalseFlags() {
+	
+	// Loop through all of the cells in the grid 
+	for (int i = 0; i < nCols; i++) {
+		for (int j = 0; j < nRows; j++) {
+
+			// If cell is a false flag
+			if (buttons[i][j].IsFlagged && !buttons[i][j].IsBomb) {
+				buttons[i][j].button->SetLabel(falseFlagChar);
+			}
+			// if cell is an unflagged bomb
+			else if (IsUnflaggedBomb(i, j)) {
+				buttons[i][j].button->SetLabel(bombChar);
+			}
+		}
+	}
+	
 }
