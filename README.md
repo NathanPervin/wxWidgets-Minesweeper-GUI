@@ -7,7 +7,7 @@ This is a basic minesweeper game that follows the same standard rules:
 - If the player clicks on a mine, the player loses
 - If the player clears all non-mine cells, the player wins 
 
-This program was created using the wxWidgets framework. 
+The GUI was created using the wxWidgets framework. 
 
 This game has a main menu that allows the user to choose a grid size from the following options:
 - 9x9 with 15 mines
@@ -31,6 +31,9 @@ The game includes the following features
 
 ##### Horizontal and Vertical Scroll
 <img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/30x16GIF.gif" alt="Alt Text" width="250" height="250">
+
+##### Full Game Playthrough
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9playthoughGIF.gif" alt="Alt Text" width="250" height="250">
 
 ## Installation and dependencies 
 Software Used:
