@@ -25,6 +25,7 @@ The game includes the following features
 - Hint button to show position of a hidden mine
 - Restart button to restart the game with the same grid size and # of mines
 - Vertical and Horizontal scroll for larger than 9x9 grid sizes
+- Left click on a numbered cell to reveal all surrounding cells (if the number of the cell is the same as the number of flags surrounding it)
 
 ##### Flag, Hint, and Restart
 <img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperDemo.gif" alt="Alt Text" width="250" height="250">
