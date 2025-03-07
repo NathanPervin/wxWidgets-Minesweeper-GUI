@@ -1,5 +1,5 @@
 # __wxWidgets Minesweeper GUI__
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9img2.jpg" alt="Alt Text" width="500" height="500">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9titleicon.png" alt="Alt Text" width="500" height="500">
 
 ## Description
 This is a basic minesweeper game that follows the same standard rules:
