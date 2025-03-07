@@ -50,6 +50,7 @@ private:
 	int CountFlagsSurrounding(int xPos, int yPos);
 	void ClearSurroundingCells(int xPos, int yPos);
 	void ShowMinesAndFalseFlags();
+	void UpdateBombsRemaining();
 
 	// Define method that will bring user back to main menu
 	void GoToMainMenu();
@@ -75,6 +76,7 @@ private:
 	wxFont headlineFont = wxFont(wxFontInfo(wxSize(0, 36)).Bold());
 	wxFont mainFont = wxFont(wxFontInfo(wxSize(0, 24)).Bold());
 	wxFont fieldInputFont = wxFont(wxFontInfo(wxSize(0, 24)));
+	wxFont bombCountFont = wxFont(wxFontInfo(wxSize(0, 30)).Bold());
 
 	// Define Unicode characters for UI & cells
 	wxUniChar restartChar = wxUniChar(0x000021BA);
@@ -99,6 +101,8 @@ private:
 	wxStaticText* headlineTextGame;
 	wxArrayString gridSizeOptions;
 	wxButton* startButton;
+	wxTextCtrl* numBombsRemainingTextCtrl;
+	wxString numBombsRemainingString;
 
 	// Define variables used for game UI elements 
 	wxStaticText* headlineText;
@@ -106,6 +110,7 @@ private:
 	wxSizerFlags buttonFlags;
 	wxBoxSizer* mainSizer;
 	wxScrolledWindow* scrolledWindow;
+	int numberFlagsPlaced = 0;
 
 	// Define game UI buttons 
 	wxButton* homeButton;

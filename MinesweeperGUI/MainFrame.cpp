@@ -306,6 +306,11 @@ void MainFrame::SetupPanels() {
 	restartButton = new wxButton(panel, restartButtonID, restartChar, wxDefaultPosition, wxSize(50, 50));
 	restartButton->SetFont(headlineFont);
 
+	numBombsRemainingString = wxString::Format("%d", numberOfBombs);
+	numBombsRemainingTextCtrl = new wxTextCtrl(panel, wxID_ANY, numBombsRemainingString, wxDefaultPosition, wxSize(100, 50), wxTE_CENTER);
+	numBombsRemainingTextCtrl->SetFont(headlineFont);
+	numBombsRemainingTextCtrl->Disable();
+	
 }
 
 // Create sizers (main, top bar, and grid)
@@ -324,7 +329,8 @@ void MainFrame::SetupSizers() {
 	topBarSizerGame->Add(homeButton, wxSizerFlags().Border(wxRIGHT, 20));
 	topBarSizerGame->Add(hintButton, wxSizerFlags().Border(wxRIGHT, 20));
 	topBarSizerGame->Add(flagButton, wxSizerFlags().Border(wxRIGHT, 20));
-	topBarSizerGame->Add(headlineTextGame, wxALL | wxEXPAND);
+	topBarSizerGame->Add(numBombsRemainingTextCtrl, wxSizerFlags().Border(wxRIGHT, 20));
+	topBarSizerGame->Add(headlineTextGame, wxALL | wxEXPAND | wxCENTER);
 	topBarSizerGame->Add(restartButton, wxSizerFlags().Border(wxLEFT, 20));
 
 	// add top bar sizer to the main sizer
@@ -357,7 +363,7 @@ void MainFrame::OnMouseWheelScroll(wxMouseEvent& evt) {
 	evt.Skip();
 }
 
-// Assign values to a matrix (vector of vectors) of ButtonData enum.
+// Assign values to a matrix (vector of vectors) of ButtonData struct.
 // Assigns coordinate, wxID, creates and assigns buttons to the grid sizer
 // Also binds each button to the dynamic event handler 
 void MainFrame::CreateMatrix() {
@@ -671,6 +677,7 @@ void MainFrame::SetFlag(int xPos, int yPos) {
 	if (!buttons[xPos][yPos].IsFlagged) { 
 		buttons[xPos][yPos].button->SetLabel(flagSetChar);
 		buttons[xPos][yPos].IsFlagged = true;
+		numberFlagsPlaced++;
 	}
 	else { // Remove Flag
 		if (InFlagMode) { // If user is in flag mode and clicks on a flag,
@@ -685,7 +692,31 @@ void MainFrame::SetFlag(int xPos, int yPos) {
 		}
 
 		buttons[xPos][yPos].IsFlagged = false;
+		numberFlagsPlaced--;
 	}	
+
+	UpdateBombsRemaining();
+}
+
+void MainFrame::UpdateBombsRemaining() {
+
+	int bombsRemaining = numberOfBombs - numberFlagsPlaced;
+
+	// Check to ensure that the user has not placed more flags than there are bombs,
+	// Display a question mark if they have 
+	if (bombsRemaining < 0) {
+		numBombsRemainingString = wxString::Format("?");
+	}
+	else {
+		numBombsRemainingString = wxString::Format("%d", bombsRemaining);
+	}
+
+	// Update text display
+	numBombsRemainingTextCtrl->Enable();
+	numBombsRemainingTextCtrl->SetValue(numBombsRemainingString);
+	numBombsRemainingTextCtrl->Disable();
+	numBombsRemainingTextCtrl->Refresh();
+
 }
 
 // Check if the player has won, ends game if so
@@ -818,6 +849,10 @@ void MainFrame::ReStart() {
 			buttons[i][j].button->SetForegroundColour(wxColor(0, 0, 0));
 		}
 	}
+
+	// Reset bombs counter display
+	numberFlagsPlaced = 0;
+	UpdateBombsRemaining();
 
 	// Reset booleans for game beginning
 	IsFirstButtonPress = true;
