@@ -28,13 +28,13 @@ The game includes the following features
 - Left click on a numbered cell to reveal all surrounding cells (if the number of the cell is the same as the number of flags surrounding it)
 
 ##### Flag, Hint, and Restart
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperDemo.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9FlagHintRestartGIF.gif" alt="Alt Text" width="250" height="250">
 
 ##### Horizontal and Vertical Scroll
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/30x16GIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/MinesweeperScrollDemoGIF.gif" alt="Alt Text" width="250" height="250">
 
 ##### Full Game Playthrough
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9playthoughGIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9PlaythroughGIF.gif" alt="Alt Text" width="250" height="250">
 
 ## Installation and dependencies 
 Software Used:
