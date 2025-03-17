@@ -160,5 +160,6 @@ private:
 	bool IsFirstButtonPress = true;
 	bool InFlagMode = false;
 	bool InHintMode = false;
+	bool HasFlaggedBeforeFirstClick = false;
 
 };

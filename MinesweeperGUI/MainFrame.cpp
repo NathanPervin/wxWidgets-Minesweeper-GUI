@@ -430,6 +430,8 @@ void MainFrame::OnRightClick(wxMouseEvent& evt) {
 		SetFlag(xPos, yPos);
 	}
 
+	HasFlaggedBeforeFirstClick = true;
+
 	evt.Skip();
 }
 
@@ -451,6 +453,12 @@ void MainFrame::FindButtonCoordinates(int buttonID) {
 // generate bombs in random positions (not in initial 3x3)
 // clear empty cells around initial click
 void MainFrame::OnFirstButtonPressed(int xPos, int yPos) {
+
+	// if user placed any flags before clicking a button, restart the game
+	if (HasFlaggedBeforeFirstClick) {
+		ReStart();
+	}
+
 	HideButton(xPos, yPos);
 	RemoveUnallowedCoordinates(xPos, yPos);
 	RandomizeCoordinateOrder();
@@ -858,6 +866,8 @@ void MainFrame::ReStart() {
 	IsFirstButtonPress = true;
 	InFlagMode = false;
 	InHintMode = false;
+	HasFlaggedBeforeFirstClick = false;
+
 }
 
 // Determines if user inputted grid width or height is valid 
