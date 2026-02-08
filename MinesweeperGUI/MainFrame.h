@@ -77,6 +77,7 @@ private:
 	wxFont mainFont = wxFont(wxFontInfo(wxSize(0, 24)).Bold());
 	wxFont fieldInputFont = wxFont(wxFontInfo(wxSize(0, 24)));
 	wxFont bombCountFont = wxFont(wxFontInfo(wxSize(0, 30)).Bold());
+	wxColor backgroundColor = wxColour(230, 230, 230);
 
 	// Define Unicode characters for UI & cells
 	wxUniChar restartChar = wxUniChar(0x000021BA);
