@@ -36,7 +36,36 @@ The game includes the following features
 ##### Full Game Playthrough
 <img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9PlaythroughGIF.gif" alt="Alt Text" width="250" height="250">
 
-## Installation and dependencies 
+## Installation 
+
+### Linux
+
+Clone this repo
+```bash
+git clone https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI.git
+```
+
+Install wxWidgets
+```bash
+apt install libwxgtk3.2-dev
+```
+
+Compile Program
+```bash
+g++ App.cpp MainFrame.cpp `wx-config --cxxflags --libs` -o minesweeper.exe
+```
+
+Run
+```bash
+./minesweeper.exe
+```
+
+If the icons don't show properly try running
+```bash
+apt install fonts-noto-color-emoji
+```
+
+### Windows
 Software Used:
 - Visual Studio Community 2022
 
