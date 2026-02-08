@@ -497,6 +497,7 @@ void MainFrame::OnButtonPressed(int xPos, int yPos) {
 
 			int surroundingBombs = CountBombsSurrounding(xPos, yPos);
 			buttons[xPos][yPos].numMinesSurrounding = surroundingBombs;
+			buttons[xPos][yPos].button->SetBackgroundColour(backgroundColor);
 
 			// Check if there are no surrounding bombs (cell is empty)
 			if (surroundingBombs == 0) {
@@ -516,7 +517,8 @@ void MainFrame::OnButtonPressed(int xPos, int yPos) {
 
 // Makes button inoperatble, transparent, and removes the text
 void MainFrame::HideButton(int xPos, int yPos) {
-	buttons[xPos][yPos].button->SetBackgroundColour(panel->GetBackgroundColour());
+	//buttons[xPos][yPos].button->SetBackgroundColour(panel->GetBackgroundColour());
+	buttons[xPos][yPos].button->SetBackgroundColour(backgroundColor);
 	buttons[xPos][yPos].button->Disable();
 	buttons[xPos][yPos].button->SetLabel("");
 }
@@ -645,7 +647,7 @@ void MainFrame::LabelCell(int xPos, int yPos, int surroundingBombs) {
 
 	// Make sure button is enabled, set text to the number of surrounding bombs
 	buttons[xPos][yPos].button->Enable();
-	buttons[xPos][yPos].button->SetBackgroundColour(panel->GetBackgroundColour());
+	buttons[xPos][yPos].button->SetBackgroundColour(backgroundColor);
 	buttons[xPos][yPos].button->SetLabel(wxString::Format("%d", surroundingBombs));
 	
 	// Set text color based on # of surrounding bombs
@@ -749,6 +751,8 @@ bool MainFrame::CheckForVictory() {
 			return true;
 		}
 	}
+	
+	return IsVictory;
 }
 
 // When the home button is clicked: go to main menu
