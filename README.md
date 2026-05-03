@@ -1,5 +1,5 @@
-# __wxWidgets Minesweeper GUI__
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9titleicon.png" alt="Alt Text" width="500" height="500">
+# wxWidgets Minesweeper GUI
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9titleicon.png" alt="victory screen of a completed minesweeper game" width="500" height="500">
 
 ## Description
 This is a basic minesweeper game that follows the same standard rules:
@@ -17,7 +17,7 @@ This game has a main menu that allows the user to choose a grid size from the fo
 
 If the user selects the Custom option, they can enter a grid width, height, and number of bombs
 
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperMainMenuCustom.jpg" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/minesweeperMainMenuCustom.jpg" alt="configuration screen that allows inputs for default grid size options or custom entry options for grid width, height, and bomb count" width="250" height="250">
 
 The game includes the following features
 - Home button that opens the main menu
@@ -28,13 +28,13 @@ The game includes the following features
 - Left click on a numbered cell to reveal all surrounding cells (if the number of the cell is the same as the number of flags surrounding it)
 
 ##### Flag, Hint, and Restart
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9FlagHintRestartGIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9FlagHintRestartGIF.gif" alt="demonstration of flagging cells, using the hint button to reveal a mine location, and restarting the game" width="250" height="250">
 
 ##### Horizontal and Vertical Scroll
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/MinesweeperScrollDemoGIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/MinesweeperScrollDemoGIF.gif" alt="demonstration of minesweeper game screen being scrolled up and down, and left and right to display more cells" width="250" height="250">
 
 ##### Full Game Playthrough
-<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9PlaythroughGIF.gif" alt="Alt Text" width="250" height="250">
+<img src="https://github.com/NathanPervin/wxWidgets-Minesweeper-GUI/blob/master/ImagesAndGifs/9x9PlaythroughGIF.gif" alt="full playthrough of a 9x9 minesweeper game from start to victory" width="250" height="250">
 
 ## Installation 
 
